@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <record id="inherit_res_partner_view_form" model="ir.ui.view">
+            <field name="name">inherit.res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group" position="after">
+                    <group string="Addictional Item" col="4">
+                        <field name="ktp"/>
+                        <field name="jenis_kelamin"/>
+                        <field name="ayah"/>
+                        <field name="ibu"/>
+                        <field name="pekerjaan_ayah"/>
+                        <field name="pekerjaan_ibu"/>
+                        <field name="tempat_lahir"/>
+                        <field name="tanggal_lahir"/>
+                        <field name="pendidikan"/>
+                        <field name="golongan_darah"/>
+                        <field name="status_hubungan"/>
+                        <field name="ukuran_baju"/>
+                    </group>
+
+                    <group string="Passpor" col="4">
+                        <field name="no_passpor"/>
+                        <field name="nama_passpor"/>
+                        <field name="tanggal_berlaku"/>
+                        <field name="tanggal_habis"/>
+                        <field name="imigrasi"/>
+                    </group>
+                    <group string="Berkas" col="4">
+                        <field name="gambar_passpor" widget="image"/>
+                        <field name="gambar_bukuk_nikah" widget="image"/>
+                        <field name="gambar_ktp" widget="image"/>
+                        <field name="gambar_kartu_keluarga" widget="image"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//form/sheet/notebook/page/group" position="after">
+                    <group string="Travel">
+                        <field name="airlines" readonly="1" invisible="1"/>
+                        <field name="hotels" readonly="1" invisible="1"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

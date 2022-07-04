@@ -1,0 +1,37 @@
+<odoo>
+
+
+    <!-- Menu Dashboard -->
+    <menuitem id="menu_dashboard_training_odoo" name="Training Odoo" web_icon="training_odoo,static/description/icon.png"/>
+
+    <!-- Menu Bar Training -->
+    <menuitem id="menu_bar_training_odoo" name="Training" parent="menu_dashboard_training_odoo" sequence="5"/>
+    <!-- Menu Item -->
+    <menuitem id="menu_item_training_course" name="Course" parent="menu_bar_training_odoo" action="training_course_action" sequence="3"/>
+    <menuitem id="menu_item_training_session" name="Session" parent="menu_bar_training_odoo" action="training_session_action" sequence="1"/>
+    <menuitem id="menu_item_training_wizard" name="Add Attendees" parent="menu_bar_training_odoo" action="training_wizard_menu_list_action"/>
+    <menuitem id="menu_item_training_wizard_cron" name="Run Scheduler" parent="menu_bar_training_odoo" action="training_wizard_cron_action"/>
+
+    <!-- Menu Bar Konfigurasi -->
+    <menuitem id="menu_bar_configuration" name="Configuration" parent="menu_dashboard_training_odoo" sequence="10"/>
+    <!-- Menu Item -->
+    <menuitem id="menu_item_training_instructor" name="Instructor" parent="menu_bar_configuration" action="training_instructor_action"/>
+    <menuitem id="menu_item_training_attendee" name="Attendee" parent="menu_bar_configuration" action="training_attendee_action"/>
+    <menuitem id="menu_item_instructor_tags" name="Instructor Tags" parent="menu_bar_configuration" action="base.action_partner_category_form"/>
+
+    <!-- ======================================================================================================================================================= -->
+    <!-- PARENT CORE -->
+    <menuitem id="menu_dashboard_travel_umroh" name="Travel Umroh" web_icon="training_odoo,static/description/odoo_icon(1).png"/>
+    <!-- PARENT MENU -->
+    <menuitem id="menu_bar_travel_umroh_master_data" name="Master Data" parent="menu_dashboard_travel_umroh"/>
+    <menuitem id="menu_bar_travel_umroh_transaksi" name="Transaction" parent="menu_dashboard_travel_umroh"/>
+    <!-- CHILD -->
+    <menuitem id="menu_item_travel_umroh_produk" name="Produk" parent="menu_bar_travel_umroh_master_data" action="sale.product_template_action"/>
+    <menuitem id="menu_item_travel_umroh_paket_produk" name="Paket Produk" parent="menu_bar_travel_umroh_master_data" action="mrp.mrp_bom_form_action"/>
+    <menuitem id="menu_item_travel_umroh_customer" name="Jamaah" parent="menu_bar_travel_umroh_master_data" action="contacts.action_contacts"/>
+    <menuitem id="menu_item_travel_umroh_airline" name="Airline" parent="menu_bar_travel_umroh_master_data" action="action_airline"/>
+    <menuitem id="menu_item_travel_umroh_hotel" name="Hotel" parent="menu_bar_travel_umroh_master_data" action="action_hotel"/>
+
+    <menuitem id="menu_item_travel_umroh_paket_perjalanan" name="Paket Perjalanan" parent="menu_bar_travel_umroh_transaksi" action="action_paket_perjalanan"/>
+
+</odoo>

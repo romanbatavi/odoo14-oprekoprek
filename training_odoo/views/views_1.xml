@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="training_attendee_view_form" model="ir.ui.view">
+            <field name="name">training.attendee.form</field>
+            <field name="model">training.attendee</field>
+            <field name="arch" type="xml">
+                <form string="Attendee Form">
+                    <sheet>
+                        <group col="4">
+                            <field name="name"/>
+
+                            <field name="email"/>
+                            <field name="sex" widget="radio"/>
+                            <!-- <field name="marital"/> -->
+                        </group>
+                        <group string="Sesi">
+                            <field name="session_ids" nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="model_name_action" model="ir.actions.act_window">
+            <field name="name">Action Name</field>
+            <field name="res_model">model_name</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+
+            </field>
+        </record>
+
+
+    </data>
+
+
+</odoo>
