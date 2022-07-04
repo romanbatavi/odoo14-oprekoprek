@@ -9,7 +9,6 @@ class PaketPerjalanan(models.Model):
     
     name = fields.Char(string='Referensi', readonly=True, default='-')
     tanggal_berangkat = fields.Date('Tanggal Berangkat')
-    # tanggal_berangkat = fields.Date('Tanggal Berangkat',default=datetime.datetime.now().date())
     tanggal_kembali = fields.Date('Tanggal  Kembali')
     sale_id = fields.Many2one('product.product', string='Sale')
     package_id = fields.Many2one('product.product', string='Package')
