@@ -23,7 +23,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'mail', 'report_xlsx', 'om_account_budget', 'mrp', 'sale'],
+    'depends': ['base', 'mail', 'report_xlsx', 'om_account_budget', 'mrp', 'sale', 'account'],
 
     # always loaded
     'data': [

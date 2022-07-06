@@ -5,6 +5,17 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group" position="before">
+                    <!-- <xpath expr="//form/sheet/group" attrs="{'invisible': [('hotels','=', False)]}"> -->
+                    <group string="Roman Perjalanan" col="4" attrs="{'invisible': [('hotels','=', False)]}">
+                        <field name="harga"/>
+                        <field name="braga"/>
+                        <field name="asia_afrika"/>
+                        <field name="stasiun"/>
+                        <field name="alun_alun"/>
+                    </group>
+                </xpath>
+
                 <xpath expr="//form/sheet/group" position="after">
                     <group string="Addictional Item" col="4">
                         <field name="ktp"/>
@@ -42,6 +53,22 @@
                         <field name="hotels" readonly="1" invisible="1"/>
                     </group>
                 </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_res_partner_view_tree" model="ir.ui.view">
+            <field name="name">inherit.res.partner.tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <field name="company_id" invisible="1"/>
+                <field name="display_name" position="after">
+                    <field name="harga"/>
+                    <field name="braga"/>
+                    <field name="asia_afrika"/>
+                    <field name="stasiun"/>
+                    <field name="alun_alun"/>
+                </field>
             </field>
         </record>
     </data>

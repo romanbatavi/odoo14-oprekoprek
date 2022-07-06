@@ -65,4 +65,9 @@ class ResPartnerInherit(models.Model):
     airlines = fields.Boolean(string='Airlines')
     hotels = fields.Boolean(string='Hotel')
     
-    
+    #ROMAN
+    braga = fields.Char(string='Ke Braga')
+    asia_afrika = fields.Char(string='Ke Asia-Afrika')
+    stasiun = fields.Char(string='Ke Stasiun')
+    alun_alun = fields.Char(string='Ke Alun-Alun')
+    harga = fields.Integer('Harga')
