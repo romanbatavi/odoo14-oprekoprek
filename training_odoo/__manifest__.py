@@ -37,6 +37,8 @@
         'views/scheduler_data.xml',
         'views/res_partner.xml',
         'views/umroh_airline_view.xml',
+        'views/purchase_order_inherit.xml',
+        'views/payment_request_inherit.xml',
         'views/umroh_hotel_view.xml',
         'views/umroh_paket_perjalanan.xml',
         'views/views.xml',
