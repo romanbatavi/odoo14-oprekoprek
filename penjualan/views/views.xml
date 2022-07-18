@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="penjualan.list">
+      <field name="name">penjualan list</field>
+      <field name="model">penjualan.penjualan</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="penjualan.action_window">
+      <field name="name">penjualan window</field>
+      <field name="res_model">penjualan.penjualan</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="penjualan.action_server">
+      <field name="name">penjualan server</field>
+      <field name="model_id" ref="model_penjualan_penjualan"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="penjualan" id="penjualan.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="penjualan.menu_1" parent="penjualan.menu_root"/>
+    <menuitem name="Menu 2" id="penjualan.menu_2" parent="penjualan.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="penjualan.menu_1_list" parent="penjualan.menu_1"
+              action="penjualan.action_window"/>
+    <menuitem name="Server to list" id="penjualan" parent="penjualan.menu_2"
+              action="penjualan.action_server"/>
+-->
+  </data>
+</odoo>

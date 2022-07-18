@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_dashboard_penjualan" name="Dashboard Penjualan" web_icon="training_odoo,static/description/odoo_icon(1).png"/>
+
+    <menuitem id="menu_dashboard_penjualan_barang" name="Data" parent="menu_dashboard_penjualan"/>
+
+    <menuitem id="menu_dashboard_penjualan_barang_masuk" name="Barang Masuk" parent="menu_dashboard_penjualan_barang" action="action_barang_masuk"/>
+    <menuitem id="menu_dashboard_penjualan_barang_keluar" name="Barang Keluar" parent="menu_dashboard_penjualan_barang" action="action_barang_keluar"/>
+</odoo>
