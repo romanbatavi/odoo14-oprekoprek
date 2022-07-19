@@ -7,7 +7,6 @@
             <field name="model">barang.masuk</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="month"/>
                     <field name="date" />
                     <field name="code" />
                     <field name="product_type" />
@@ -18,6 +17,7 @@
                     <field name="operational" />
                     <field name="cashback" />
                     <field name="total" />
+                    <field name="state"/>
                 </tree>
             </field>
         </record>
@@ -28,9 +28,11 @@
             <field name="model">barang.masuk</field>
             <field name="arch" type="xml">
                 <form string="Barang Masuk">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="ready,sold" />
+                    </header>
                     <sheet>
                         <group col="4">
-                            <field name="month" placeholder="Bulan" style="color:#898687"/>
                             <field name="date" />
                             <field name="code" />
                             <field name="product_type" />

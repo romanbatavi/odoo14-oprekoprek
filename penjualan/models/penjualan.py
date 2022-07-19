@@ -1,65 +1,26 @@
-from odoo import models, fields, api
+from odoo import api, fields, models
+from datetime import timedelta, datetime, date
+from odoo.exceptions import ValidationError, UserError
+import datetime
 
 class BarangMasuk(models.Model):
     _name = 'barang.masuk'
     _description = 'Barang Masuk'
     
-    product_name = fields.Char('Product Name',required=True)
-    code = fields.Char('Code',required=True)
-    product_type = fields.Char('Product Type',required=True)
-    specification = fields.Char('Specification',required=True)
-    purchase_price = fields.Integer('Purchase Price',required=True)
-    advertising = fields.Integer('Advertising',)
-    operational = fields.Integer('Operational')
-    cashback = fields.Integer('Cashback')
-    note = fields.Char('Note')
-    month = fields.Selection([
-        ('jan', 'January'),
-        ('feb', 'February'),
-        ('mar', 'March'),
-        ('apr', 'April'),
-        ('may', 'May'),
-        ('jun', 'June'),
-        ('jul', 'July'),
-        ('aug', 'August'),
-        ('sep', 'September'),
-        ('oct', 'October'),
-        ('nov', 'November'),
-        ('dec', 'December')
-    ], string='Month',required=True)
-    date = fields.Selection([
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3'),
-        ('4', '4'),
-        ('5', '5'),
-        ('6', '6'),
-        ('7', '7'),
-        ('8', '8'),
-        ('9', '9'),
-        ('10', '10'),
-        ('11', '11'),
-        ('12', '12'),
-        ('13', '13'),
-        ('14', '14'),
-        ('15', '15'),
-        ('16', '16'),
-        ('17', '17'),
-        ('18', '18'),
-        ('19', '19'),
-        ('20', '20'),
-        ('21', '21'),
-        ('22', '22'),
-        ('23', '23'),
-        ('24', '24'),
-        ('25', '25'),
-        ('26', '26'),
-        ('27', '27'),
-        ('28', '28'),
-        ('29', '29'),
-        ('30', '30'),
-        ('31', '31')
-    ], string='Date',required=True)
+    date = fields.Date('Tanggal',readonly=True,default=date.today())
+    product_name = fields.Char('Product Name',readonly=True, states={'ready': [('readonly', False)]})
+    code = fields.Char('Code',readonly=True, states={'ready': [('readonly', False)]})
+    product_type = fields.Char('Product Type',readonly=True, states={'ready': [('readonly', False)]})
+    specification = fields.Char('Specification',readonly=True, states={'ready': [('readonly', False)]})
+    purchase_price = fields.Integer('Purchase Price',readonly=True, states={'ready': [('readonly', False)]})
+    advertising = fields.Integer('Advertising', readonly=True,states={'ready': [('readonly', False)]})
+    operational = fields.Integer('Operational', readonly=True,states={'ready': [('readonly', False)]})
+    cashback = fields.Integer('Cashback', readonly=True, states={'ready': [('readonly', False)]})
+    note = fields.Char('Note', readonly=True, states={'ready': [('readonly', False)]})
+    state = fields.Selection([
+        ('ready', 'Ready'),
+        ('sold', 'Sold')
+    ], string='Status',default='ready')
     total = fields.Integer(compute='_compute_total', string='Total')
     
     @api.depends('purchase_price','advertising','operational','cashback')
@@ -71,7 +32,7 @@ class BarangMasuk(models.Model):
     def name_get(self):
         result = []
         for x in self:
-            name = x.product_name
+            name = x.code + " "  + "-" + " " + x.product_name
             result.append((x.id, name))
         return result
     
@@ -79,21 +40,43 @@ class BarangKeluar(models.Model):
     _name = 'barang.keluar'
     _description = 'Barang Keluar'
     
-    masuk_id = fields.Many2one('barang.masuk', string='Product Name')
+    date = fields.Date('Tanggal',default=date.today())
+    masuk_id = fields.Many2one('barang.masuk', string='Product Name', readonly=True, required=True, states={'ready': [('readonly', False)]})
     product_type = fields.Char('Product Type',related="masuk_id.product_type")
-    month = fields.Selection('Month')
-    date = fields.Selection('Date')
     code = fields.Char('Code',related="masuk_id.code")
+    product_name = fields.Char('Product Name',related="masuk_id.product_name")
     purchase_price = fields.Integer('Purchase Price',related="masuk_id.purchase_price")
-    selling_price = fields.Integer('Selling Price')
+    selling_price = fields.Integer('Selling Price', readonly=True, required=True, states={'ready': [('readonly', False)]})
     operational = fields.Integer('Operational')
     address = fields.Char('Address')
     profit = fields.Char(compute='_compute_profit', string='Profit')
+    state = fields.Selection([
+        ('ready', 'Ready'),
+        ('sold', 'Sold')
+    ], string='Status',default='ready')
 
-    
     @api.depends('purchase_price','selling_price','operational')
     def _compute_profit(self):
         for x in self:
             prof = x.purchase_price + x.operational - x.selling_price
             x.profit = prof
+            
+    def name_get(self):
+        result = []
+        for x in self:
+            name = x.code + " "  + "-" + " " + x.product_name
+            result.append((x.id, name))
+        return result
     
+    def action_confirm(self):
+        for x in self:
+            x.state = 'sold'
+            x.masuk_id.state = 'sold'
+
+    # @api.model
+    # def create(self, vals):
+    #     for change in self:
+    #         if change.date == change.masuk_id.date:
+    #             raise UserError(("wkwkwkwwkwkwkwkwk"))
+    #     makan_nasi =  super(BarangKeluar, self).create(vals)
+    #     return makan_nasi
