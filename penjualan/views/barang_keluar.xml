@@ -29,18 +29,22 @@
                 <form string="Barang Keluar">
                     <header>
                         <button id="button_confirm" name="action_confirm" string="Confirm" class="btn-primary" type="object"/>
-                        <field name="state" widget="statusbar" statusbar_visible="ready,sold" invisible="1"/>
+                        <field name="state" widget="statusbar" statusbar_visible="ready,sold"/>
                     </header>
                     <sheet>
-                        <group col="4">
+                        <group>
                             <field name="date" />
+                            <field name="masuk_id"  options="{'no_create': True, 'no_create_edit':True}"/>
                             <field name="code" />
                             <field name="product_type" />
-                            <field name="masuk_id" />
+                        </group>
+                        <group>
                             <field name="purchase_price" />
                             <field name="selling_price" />
                             <field name="operational" />
                             <field name="profit" />
+                        </group>
+                        <group>
                             <field name="address" />
                         </group>
                     </sheet>

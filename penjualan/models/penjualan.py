@@ -72,11 +72,3 @@ class BarangKeluar(models.Model):
         for x in self:
             x.state = 'sold'
             x.masuk_id.state = 'sold'
-
-    # @api.model
-    # def create(self, vals):
-    #     for change in self:
-    #         if change.date == change.masuk_id.date:
-    #             raise UserError(("wkwkwkwwkwkwkwkwk"))
-    #     makan_nasi =  super(BarangKeluar, self).create(vals)
-    #     return makan_nasi

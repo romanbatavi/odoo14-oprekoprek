@@ -32,12 +32,14 @@
                         <field name="state" widget="statusbar" statusbar_visible="ready,sold" />
                     </header>
                     <sheet>
-                        <group col="4">
+                        <group>
                             <field name="date" />
                             <field name="code" />
                             <field name="product_type" />
                             <field name="product_name" />
                             <field name="specification" />
+                        </group>
+                        <group>
                             <field name="purchase_price" />
                             <field name="advertising" />
                             <field name="operational" />
