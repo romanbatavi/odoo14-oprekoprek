@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <data>
-        <record id="group_user_create_employee" model="res.groups">
-            <field name="name">Hak Membuat &amp; Menghapus Karyawan</field>
-        </record>
-
-        <record id="group_user_create_employee" model="res.groups">
-            <field name="name">Hak Membuat &amp; Menghapus Karyawan</field>
+        <record id="group_user_dz" model="res.groups">
+            <field name="name">Dzaki</field>
         </record>
     </data>
 </odoo>

@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from datetime import timedelta, datetime, date
 from odoo.exceptions import ValidationError, UserError
 import datetime
@@ -7,12 +7,13 @@ class BarangMasuk(models.Model):
     _name = 'barang.masuk'
     _description = 'Barang Masuk'
     
-    date = fields.Date('Tanggal',readonly=True,default=date.today())
-    product_name = fields.Char('Product Name',readonly=True, states={'ready': [('readonly', False)]})
-    code = fields.Char('Code',readonly=True, states={'ready': [('readonly', False)]})
-    product_type = fields.Char('Product Type',readonly=True, states={'ready': [('readonly', False)]})
-    specification = fields.Char('Specification',readonly=True, states={'ready': [('readonly', False)]})
-    purchase_price = fields.Integer('Purchase Price',readonly=True, states={'ready': [('readonly', False)]})
+    date = fields.Date('Tanggal', default=fields.Date.context_today, required=True)
+    date_compare = fields.Date('Tanggal', readonly=True, default=fields.Date.context_today)
+    product_name = fields.Char('Product Name', required=True, readonly=True, states={'ready': [('readonly', False)]})
+    code = fields.Char('Code',readonly=True, required=True, states={'ready': [('readonly', False)]})
+    product_type = fields.Char('Product Type', readonly=True, states={'ready': [('readonly', False)]})
+    specification = fields.Char('Specification', readonly=True, states={'ready': [('readonly', False)]})
+    purchase_price = fields.Integer('Purchase Price', readonly=True, states={'ready': [('readonly', False)]})
     advertising = fields.Integer('Advertising', readonly=True,states={'ready': [('readonly', False)]})
     operational = fields.Integer('Operational', readonly=True,states={'ready': [('readonly', False)]})
     cashback = fields.Integer('Cashback', readonly=True, states={'ready': [('readonly', False)]})
@@ -36,6 +37,14 @@ class BarangMasuk(models.Model):
             result.append((x.id, name))
         return result
     
+    @api.constrains('date')
+    def _constrains_date(self):
+        for rec in self:
+            if rec.date < rec.date_compare:
+                msg = _('Tanggal Tidak Bisa Kurang Dari Tanggal Hari Ini')    
+                raise UserError(msg)
+        return 
+    
 class BarangKeluar(models.Model):
     _name = 'barang.keluar'
     _description = 'Barang Keluar'
@@ -54,6 +63,12 @@ class BarangKeluar(models.Model):
         ('ready', 'Ready'),
         ('sold', 'Sold')
     ], string='Status',default='ready')
+    
+    @api.constrains('state')
+    def _constrains_state(self):
+        for st in self:
+            if st.state != 'ready':
+                raise ValidationError("Sebelum Record Dihapus, Mohon Pencet Tombol Revert")
 
     @api.depends('purchase_price','selling_price','operational')
     def _compute_profit(self):
@@ -70,5 +85,6 @@ class BarangKeluar(models.Model):
     
     def action_confirm(self):
         for x in self:
-            x.state = 'sold'
-            x.masuk_id.state = 'sold'
+            x.state = 'ready'
+            x.masuk_id.state = 'ready'
+    
